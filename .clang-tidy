@@ -1,0 +1,27 @@
+Checks: >
+  readability-identifier-naming
+
+WarningsAsErrors: '*'
+
+HeaderFilterRegex: '(source/.*)'
+
+CheckOptions:
+  # Private member variables
+  - key: readability-identifier-naming.PrivateMemberPrefix
+    value: _
+  - key: readability-identifier-naming.PrivateMemberCase
+    value: camelBack
+
+  # Member function (non-static, non-const, non-virtual)
+  - key: readability-identifier-naming.MethodCase
+    value: CamelCase
+
+  # Class names
+  - key: readability-identifier-naming.ClassCase
+    value: CamelCase
+
+  # Optional, but ensures errors are reported instead of silently skipped
+  - key: readability-identifier-naming.IgnoreFailures
+    value: false
+  - key: readability-identifier-naming.IgnoreFailedSplit
+    value: false

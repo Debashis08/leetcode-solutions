@@ -1,0 +1,30 @@
+# Label: contest
+# Applied if a solution OR a test case for a contest is added
+contest:
+  - changed-files:
+      - any-glob-to-any-file: 'src/contests/**'
+      - any-glob-to-any-file: 'tests/contests/**'
+
+# Label: problemset
+# Applied if a solution OR a test case for the problemset is added
+problemset:
+  - changed-files:
+      - any-glob-to-any-file: 'src/problemsets/**'
+      - any-glob-to-any-file: 'tests/problemsets/**'
+
+# Label: tooling
+# Applied if change the runner logic or repo config is added
+tooling:
+  - changed-files:
+        # Watches test runners specifically
+      - any-glob-to-any-file: 'tests/*.cpp'
+      - any-glob-to-any-file: '.github/**'
+      - any-glob-to-any-file: '.clang-tidy'
+      - any-glob-to-any-file: 'template.cpp'
+
+# Label: documentation
+# Applied ONLY for root level docs (README, CONTRIBUTING, etc.)
+documentation:
+  - changed-files:
+      - any-glob-to-any-file: '*.md'
+      - any-glob-to-any-file: 'LICENSE'

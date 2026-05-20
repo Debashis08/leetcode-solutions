@@ -1,0 +1,36 @@
+name: auto-labeler
+
+# Run this on every PR open or update
+on: 
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+permissions:
+  contents: read
+  # Required to add labels
+  pull-requests: write
+
+jobs:
+  assign-labels:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+      # 1. Standard File-based Labeler (Contest vs Problemset)
+      - name: Assign Labels Based on Changes
+        id: labeler
+        uses: actions/labeler@v5
+        with:
+          # This tells it to look at your .github/labeler.yaml
+          configuration-path: .github/labeler.yaml
+          repo-token: "${{ secrets.GITHUB_TOKEN }}"
+          sync-labels: true
+
+      # 2. NEW: Branch-based Labeler (Ignore Release Branches)
+      - name: Label Release PRs to Skip Changelog
+        # Only run if the source branch starts with 'release/'
+        if: startsWith(github.head_ref, 'release/')
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh pr edit ${{ github.event.pull_request.number }} --add-label "skip-changelog"

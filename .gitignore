@@ -1,0 +1,5 @@
+.vs/
+.vscode/
+*.exe
+compile_errors.txt
+artifact/

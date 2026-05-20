@@ -1,0 +1,31 @@
+# Defines how the release body is formatted. 
+# $CHANGES is where the categorized list will appear.
+template: |
+  ### Changes in this release
+  $CHANGES
+  
+  **Full Changelog:** https://github.com/$OWNER/$REPOSITORY/compare/$PREVIOUS_TAG...v$RESOLVED_VERSION
+
+
+# These categories match the labels from your labeler.yaml
+categories:
+  - title: 'Contest Updates'
+    labels:
+      - 'contest'
+  - title: 'Problemset Additions'
+    labels:
+      - 'problemset'
+  - title: 'Infrastructure and Tooling'
+    labels:
+      - 'tooling'
+  - title: 'Documentation'
+    labels:
+      - 'documentation'
+
+# Fallback for anything that doesn't match the above
+exclude-labels:
+  - 'skip-changelog'
+
+replacers:
+  - search: '/^## (.*)$/gm'
+    replace: '**$1**'

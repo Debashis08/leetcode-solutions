@@ -1,0 +1,96 @@
+name: validate
+
+on:
+  pull_request:
+    types: [opened, synchronize]
+    branches:
+      - 'release/*'
+      - 'main'
+
+jobs:
+  # job 1: Branch Policy check
+  validate-branch-policy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Verify Branch Strategy
+        run: |
+          HEAD="${{ github.head_ref }}"
+          BASE="${{ github.base_ref }}"
+          echo "Verifying path: $HEAD -> $BASE"
+          
+          if [[ "$HEAD" == feature/* && "$BASE" == release/* ]]; then
+            echo "Pull Request is allowed: $HEAD -> $BASE."
+            exit 0
+          elif [[ "$HEAD" == release/* && "$BASE" == main ]]; then
+            echo "Pull Request is allowed: $HEAD -> $BASE."
+            exit 0
+          else
+            echo "::error::Invalid Pull Request from '$HEAD' -> '$BASE'."
+            echo "Allowed: 'feature/*'->'release/*' OR 'release/*'->'main'."
+            exit 1
+          fi
+
+  # job 2: Static code analysis
+  lint-code:
+    needs: validate-branch-policy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install clang-tidy
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y clang-tidy
+
+      - name: Run clang-tidy
+        run: |
+          find source -name '*.cpp' | while read file; do
+            echo "clang-tidy checking on $file"
+            clang-tidy "$file" -- -std=c++17 || exit 1
+          done
+
+  # job 3: Build Project 
+  build-project:
+    needs: lint-code
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y g++
+
+      - name: Build allTestRunner
+        run: |
+          g++ tests/allTestRunner.cpp -std=c++17 -o tests/allTestRunner
+
+      # UPLOAD THE BINARY so the Test job can see it
+      - name: Upload Build Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: compiled-binary
+          path: tests/allTestRunner
+          retention-days: 1
+
+  # job 4: Run all tests
+  run-all-tests:
+    needs: build-project
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        
+      # DOWNLOAD THE BINARY from the Build job
+      - name: Download Build Artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: compiled-binary
+          path: tests
+
+      - name: Make executable
+        run: chmod +x tests/allTestRunner
+      - name: Run all tests
+        run: ./tests/allTestRunner
