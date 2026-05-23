@@ -3,7 +3,7 @@ Checks: >
 
 WarningsAsErrors: '*'
 
-HeaderFilterRegex: '(source/.*)'
+HeaderFilterRegex: '(src/.*)'
 
 CheckOptions:
   # Private member variables
