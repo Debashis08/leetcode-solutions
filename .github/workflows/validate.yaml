@@ -45,7 +45,7 @@ jobs:
 
       - name: Run clang-tidy
         run: |
-          find source -name '*.cpp' | while read file; do
+          find src -name '*.cpp' | while read file; do
             echo "clang-tidy checking on $file"
             clang-tidy "$file" -- -std=c++17 || exit 1
           done
