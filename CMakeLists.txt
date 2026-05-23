@@ -16,14 +16,18 @@ foreach(SOURCE_FILE IN LISTS PROBLEM_FILES)
     # Get the relative path of the .cpp file starting from the src folder
     file(RELATIVE_PATH REL_SOURCE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/src" "${SOURCE_FILE}")
 
-    # Replace '.cpp' with '_debug.txt'
-    string(REPLACE ".cpp" "_debug.txt" REL_TEST_PATH "${REL_SOURCE_PATH}")
+    # Extract the directory part of the relative path
+    get_filename_component(REL_DIR_PATH "${REL_SOURCE_PATH}" DIRECTORY)
 
-    # Construct the absolute path to where the text file should be
-    set(TEST_FILE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/tests/${REL_TEST_PATH}")
+    # Construct the absolute path, injecting the "debug" folder
+    # If the file is directly in src/ (no subfolder), handle it cleanly
+    if(REL_DIR_PATH STREQUAL "")
+        set(TEST_FILE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/tests/debug/${TARGET_NAME}_debug.txt")
+    else()
+        set(TEST_FILE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/tests/${REL_DIR_PATH}/debug/${TARGET_NAME}_debug.txt")
+    endif()
 
-    # Generate the Invisible Injector C++ file
-    # We create a temporary file in the build directory
+    # Create a temporary file in the build directory
     set(INJECTOR_FILE "${CMAKE_CURRENT_BINARY_DIR}/${TARGET_NAME}_injector.cpp")
     
     # The C++ code that redirects stdin before main() starts
@@ -33,9 +37,15 @@ foreach(SOURCE_FILE IN LISTS PROBLEM_FILES)
         StdinRedirector() {
             fprintf(stderr, \"[Injector] Looking for: %s\\n\", \"${TEST_FILE_PATH}\");
             
-            if (FILE* f = fopen(\"${TEST_FILE_PATH}\", \"r\")) {
-                fclose(f); 
-                freopen(\"${TEST_FILE_PATH}\", \"r\", stdin);
+            FILE* f = nullptr;
+            // fopen_s returns 0 on success and takes the FILE* by reference
+            if (fopen_s(&f, \"${TEST_FILE_PATH}\", \"r\") == 0) {
+                if (f) fclose(f); 
+                
+                FILE* stream = nullptr;
+                // freopen_s also returns 0 on success and takes the FILE* by reference
+                freopen_s(&stream, \"${TEST_FILE_PATH}\", \"r\", stdin);
+                
                 fprintf(stderr, \"[Injector] Success: Reading from _debug.txt file!\\n\");
             } else {
                 fprintf(stderr, \"[Injector] File not found. Waiting for keyboard input.\\n\");
@@ -45,7 +55,7 @@ foreach(SOURCE_FILE IN LISTS PROBLEM_FILES)
     } redirector; // Create a global instance so it runs before main()
     ")
 
-    # Compile BOTH your original code AND the injector together
+    # Compile BOTH your original code AND the injector together [cite: 73]
     add_executable(${TARGET_NAME} ${SOURCE_FILE} ${INJECTOR_FILE})
 
 endforeach()
