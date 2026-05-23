@@ -3,9 +3,8 @@ Tags
 
 
 
-----------------------------------------------------------------------------------------------------------------------------
-
 Problem Description
+
 
 
 
@@ -27,7 +26,6 @@ Problem Description
 #include <limits>
 #include <iomanip>
 #include <functional>
-
 using namespace std;
 
 const int MOD = 1e9 + 7;
