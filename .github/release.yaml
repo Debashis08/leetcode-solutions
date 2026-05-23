@@ -1,7 +1,7 @@
 # Defines how the release body is formatted. 
 # $CHANGES is where the categorized list will appear.
 template: |
-  ### Changes in this release
+  ### Leetcode Solutions — release v$RESOLVED_VERSION
   $CHANGES
   
   **Full Changelog:** https://github.com/$OWNER/$REPOSITORY/compare/$PREVIOUS_TAG...v$RESOLVED_VERSION
@@ -9,13 +9,10 @@ template: |
 
 # These categories match the labels from your labeler.yaml
 categories:
-  - title: 'Contest Updates'
+  - title: 'Solutions'
     labels:
-      - 'contest'
-  - title: 'Problemset Additions'
-    labels:
-      - 'problemset'
-  - title: 'Infrastructure and Tooling'
+      - 'solution'
+  - title: 'Tooling'
     labels:
       - 'tooling'
   - title: 'Documentation'

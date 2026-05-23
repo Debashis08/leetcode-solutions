@@ -1,16 +1,9 @@
-# Label: contest
-# Applied if a solution OR a test case for a contest is added
-contest:
+# Label: solution
+# Applied if a solution OR a test case for a solution is added
+solution:
   - changed-files:
-      - any-glob-to-any-file: 'src/contests/**'
-      - any-glob-to-any-file: 'tests/contests/**'
-
-# Label: problemset
-# Applied if a solution OR a test case for the problemset is added
-problemset:
-  - changed-files:
-      - any-glob-to-any-file: 'src/problemsets/**'
-      - any-glob-to-any-file: 'tests/problemsets/**'
+      - any-glob-to-any-file: 'src/**'
+      - any-glob-to-any-file: 'tests/**'
 
 # Label: tooling
 # Applied if change the runner logic or repo config is added
