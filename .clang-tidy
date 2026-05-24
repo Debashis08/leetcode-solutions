@@ -7,8 +7,6 @@ HeaderFilterRegex: '(src/.*)'
 
 CheckOptions:
   # Private member variables
-  - key: readability-identifier-naming.PrivateMemberPrefix
-    value: _
   - key: readability-identifier-naming.PrivateMemberCase
     value: camelBack
 
