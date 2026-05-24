@@ -7,14 +7,12 @@ HeaderFilterRegex: '(src/.*)'
 
 CheckOptions:
   # Private member variables
-  - key: readability-identifier-naming.PrivateMemberPrefix
-    value: _
   - key: readability-identifier-naming.PrivateMemberCase
     value: camelBack
 
   # Member function (non-static, non-const, non-virtual)
   - key: readability-identifier-naming.MethodCase
-    value: CamelCase
+    value: camelBack
 
   # Class names
   - key: readability-identifier-naming.ClassCase
