@@ -6,6 +6,7 @@ template: |
   
   **Full Changelog:** https://github.com/$OWNER/$REPOSITORY/compare/$PREVIOUS_TAG...v$RESOLVED_VERSION
 
+change-template: '- $TITLE [#$NUMBER]'
 
 # These categories match the labels from your labeler.yaml
 categories:
