@@ -25,6 +25,8 @@ Problem Description
 #include <limits>
 #include <iomanip>
 #include <functional>
+#include<cstring>
+#include<climits>
 using namespace std;
 
 
