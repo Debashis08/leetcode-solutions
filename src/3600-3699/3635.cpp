@@ -6,7 +6,7 @@ array, greedy
 
 Problem Description
 
-3635. Earliest Finish Time for Land and Water Rides I
+3635. Earliest Finish Time for Land and Water Rides II
 
 You are given two categories of theme park attractions: land rides and water rides.
 Land rides
