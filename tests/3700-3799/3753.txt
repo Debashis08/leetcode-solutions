@@ -1,0 +1,20 @@
+Test Case 1:
+Input:
+120
+130
+Output:
+3
+
+Test Case 2:
+Input:
+198
+202
+Output:
+3
+
+Test Case 3:
+Input:
+4848
+4848
+Output:
+2
