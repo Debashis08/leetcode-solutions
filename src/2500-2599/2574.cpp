@@ -53,7 +53,6 @@ using namespace std;
 class Solution {
 public:
 	vector<int> leftRightDifference(vector<int>& nums) {
-		long leftSum = accumulate(nums.begin(), nums.end() - 1, 0);
 		long rightSum = accumulate(nums.begin() + 1, nums.end(), 0);
 		vector<int> result(nums.size());
 		int ls = 0;
