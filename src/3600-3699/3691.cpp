@@ -89,7 +89,7 @@ public:
         maxv[node] = max(maxv[node * 2], maxv[node * 2 + 1]);
         minv[node] = min(minv[node * 2], minv[node * 2 + 1]);
     }
-    int query_max(int node, int l, int r, int ql, int qr)
+    int queryMax(int node, int l, int r, int ql, int qr)
     {
         if (ql <= l && r <= qr)
         {
@@ -99,17 +99,17 @@ public:
         int res = INT_MIN;
         if (ql <= m)
         {
-            res = max(res, query_max(node * 2, l, m, ql, qr));
+            res = max(res, queryMax(node * 2, l, m, ql, qr));
         }
         if (qr > m)
         {
-            res = max(res, query_max(node * 2 + 1, m + 1, r, ql, qr));
+            res = max(res, queryMax(node * 2 + 1, m + 1, r, ql, qr));
         }
 
         return res;
     }
 
-    int query_min(int node, int l, int r, int ql, int qr)
+    int queryMin(int node, int l, int r, int ql, int qr)
     {
         if (ql <= l && r <= qr)
         {
@@ -119,11 +119,11 @@ public:
         int res = INT_MAX;
         if (ql <= m)
         {
-            res = min(res, query_min(node * 2, l, m, ql, qr));
+            res = min(res, queryMin(node * 2, l, m, ql, qr));
         }
         if (qr > m)
         {
-            res = min(res, query_min(node * 2 + 1, m + 1, r, ql, qr));
+            res = min(res, queryMin(node * 2 + 1, m + 1, r, ql, qr));
         }
         return res;
     }
@@ -138,7 +138,7 @@ public:
         priority_queue<tuple<int, int, int>> pq;
         for (int l = 0; l < n; l++)
         {
-            pq.emplace(seg.query_max(1, 0, n - 1, l, n - 1) - seg.query_min(1, 0, n - 1, l, n - 1), l, n - 1);
+            pq.emplace(seg.queryMax(1, 0, n - 1, l, n - 1) - seg.queryMin(1, 0, n - 1, l, n - 1), l, n - 1);
         }
 
         long long res = 0;
@@ -149,7 +149,7 @@ public:
             res += val;
             if (r > l)
             {
-                pq.emplace(seg.query_max(1, 0, n - 1, l, r - 1) - seg.query_min(1, 0, n - 1, l, r - 1), l, r - 1);
+                pq.emplace(seg.queryMax(1, 0, n - 1, l, r - 1) - seg.queryMin(1, 0, n - 1, l, r - 1), l, r - 1);
             }
         }
 
