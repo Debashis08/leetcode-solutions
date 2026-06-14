@@ -114,10 +114,21 @@ int main()
         else
         {
             tail->next = new ListNode(x);
+            tail = tail->next;
         }
     }
     Solution sol;
     int result = sol.pairSum(head);
     cout << result << "\n";
+
+    ListNode* current = head;
+    while (current != nullptr)
+    {
+        ListNode* nextNode = current->next;
+        delete current;
+        current = nextNode;
+    }
+    head = nullptr;
+    tail = nullptr;
 	return 0;
 }
