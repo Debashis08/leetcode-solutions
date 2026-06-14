@@ -77,7 +77,7 @@ public:
         ListNode* fast = head;
         ListNode* slow = head;
         stack<int> st;
-        while (fast != nullptr)
+        while (fast != nullptr && fast->next != nullptr)
         {
             fast = fast->next->next;
             st.push(slow->val);
