@@ -91,4 +91,36 @@ public:
         }
         cout << "\n";
     }
+
+    // Method to generate a Linked List from a vector
+    static ListNode* createLinkedList(const vector<int>& nums)
+    {
+        if (nums.empty())
+        {
+            return nullptr;
+        }
+
+        ListNode* dummy = new ListNode(0);
+        ListNode* current = dummy;
+
+        for (int num : nums)
+        {
+            current->next = new ListNode(num);
+            current = current->next;
+        }
+
+        ListNode* head = dummy->next;
+        delete dummy;
+        return head;
+    }
+
+    static void printList(ListNode* head)
+    {
+        ListNode* node = head;
+        while (node)
+        {
+            cout << node->val << (node->next?" ":"");
+            node = node->next;
+        }
+    }
 };
