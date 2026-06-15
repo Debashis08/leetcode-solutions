@@ -99,36 +99,15 @@ public:
 int main()
 {
     int n;
-    ListNode* head = nullptr;
-    ListNode* tail = nullptr;
     cin >> n;
-    int x;
+    vector<int> nums(n);
     for (int i = 0; i < n; i++)
     {
-        cin >> x;
-        if (head == nullptr)
-        {
-            head = new ListNode(x);
-            tail = head;
-        }
-        else
-        {
-            tail->next = new ListNode(x);
-            tail = tail->next;
-        }
+        cin >> nums[i];
     }
+    ListNode* head = Core::createLinkedList(nums);
     Solution sol;
     int result = sol.pairSum(head);
     cout << result << "\n";
-
-    ListNode* current = head;
-    while (current != nullptr)
-    {
-        ListNode* nextNode = current->next;
-        delete current;
-        current = nextNode;
-    }
-    head = nullptr;
-    tail = nullptr;
 	return 0;
 }
