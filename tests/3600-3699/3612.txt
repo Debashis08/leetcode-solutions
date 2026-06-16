@@ -1,0 +1,10 @@
+Test Case 1:
+Input:
+a#b%*
+Output:
+ba
+
+Test Case 2:
+Input:
+z*#
+Output:
