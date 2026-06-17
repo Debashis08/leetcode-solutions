@@ -1,0 +1,20 @@
+Test Case 1:
+Input:
+a#b%*
+1
+Output:
+a
+
+Test Case 2:
+Input:
+cd%#*#
+3
+Output:
+d
+
+Test Case 3:
+Input:
+z*#
+0
+Output:
+.

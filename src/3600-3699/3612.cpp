@@ -1,7 +1,7 @@
 /*
 Tags
 level-medium
-string
+string, simulation
 
 Problem Description
 3612. Process String with Special Operations I
