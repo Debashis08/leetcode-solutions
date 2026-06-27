@@ -54,7 +54,7 @@ The input is generated such that there is at least one query of type 2.
 #include <functional>
 #include <cstring>
 #include <climits>
-#include "../../core/core.h"
+#include "../core/core.h"
 using namespace std;
 
 class Solution {

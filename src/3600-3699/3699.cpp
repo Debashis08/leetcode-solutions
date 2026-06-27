@@ -57,7 +57,7 @@ Constraints:
 #include <functional>
 #include <cstring>
 #include <climits>
-#include "../../core/core.h"
+#include "../core/core.h"
 using namespace std;
 
 constexpr int MOD = 1e9 + 7;
