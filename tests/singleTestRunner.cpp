@@ -67,7 +67,7 @@ int main()
     testCaseFilePath = helper.ChangeExtensionToTxt(testCaseFilePath);
 
     // Compile the source code
-    std::string compileCommand = "g++ \"" + sourceFilePath + "\" -o " EXECUTABLE_NAME " 2> compile_errors.txt";
+    std::string compileCommand = "g++ -std=c++20 \"" + sourceFilePath + "\" -o " EXECUTABLE_NAME " 2> compile_errors.txt";
     int compileResult = std::system(compileCommand.c_str());
 
     if (compileResult != 0)
