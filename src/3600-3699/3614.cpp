@@ -75,7 +75,7 @@ The length of result after processing s will not exceed 10^15.
 #include <functional>
 #include <cstring>
 #include <climits>
-#include "../../core/core.h"
+#include "../core/core.h"
 using namespace std;
 
 class Solution

@@ -56,7 +56,7 @@ The number of nodes in the list is an even integer in the range [2, 10^5].
 #include <functional>
 #include <cstring>
 #include <climits>
-#include "../../core/core.h"
+#include "../core/core.h"
 using namespace std;
 
 /**

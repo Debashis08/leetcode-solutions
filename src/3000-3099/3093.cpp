@@ -59,7 +59,7 @@ Sum of wordsQuery[i].length is at most 5 * 10^5.
 #include <functional>
 #include<cstring>
 #include<climits>
-#include "../../core/core.h"
+#include "../core/core.h"
 using namespace std;
 
 // Getting TLE in leetcode

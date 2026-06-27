@@ -54,7 +54,7 @@ pivot equals to an element of nums.
 #include <functional>
 #include <cstring>
 #include <climits>
-#include "../../core/core.h"
+#include "../core/core.h"
 using namespace std;
 
 class Solution {

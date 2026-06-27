@@ -45,7 +45,7 @@ Note: This question is the same as 2287: Rearrange Characters to Make Target Str
 #include <functional>
 #include <cstring>
 #include <climits>
-#include "../../core/core.h"
+#include "../core/core.h"
 using namespace std;
 
 class Solution

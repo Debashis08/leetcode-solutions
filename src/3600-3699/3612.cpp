@@ -60,7 +60,7 @@ s consists of only lowercase English letters and special characters *, #, and %.
 #include <functional>
 #include <cstring>
 #include <climits>
-#include "../../core/core.h"
+#include "../core/core.h"
 using namespace std;
 
 class Solution
