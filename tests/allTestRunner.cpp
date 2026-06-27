@@ -117,7 +117,7 @@ int main()
 
             std::cout << "\nTesting: " << fs::relative(entry.path(), sourceDir).string() << "\n";
 
-            std::string compileCommand = "g++ \"" + sourcePath + "\" -o " EXECUTABLE_NAME " 2> compile_errors.txt";
+            std::string compileCommand = "g++ -std=c++20 \"" + sourcePath + "\" -o " EXECUTABLE_NAME " 2> compile_errors.txt";
             if (std::system(compileCommand.c_str()) != 0)
             {
                 std::cerr << "Compilation failed for: " << sourcePath << "\n";
