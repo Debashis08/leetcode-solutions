@@ -1,0 +1,20 @@
+Test Case 1:
+Input:
+5
+2 2 1 2 1
+Output:
+2
+
+Test Case 2:
+Input:
+3
+100 1 1000
+Output:
+3
+
+Test Case 3:
+Input:
+5
+1 2 3 4 5
+Output:
+5
