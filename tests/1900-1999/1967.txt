@@ -1,0 +1,23 @@
+Test Case 1:
+Input:
+4
+abc
+a abc bc d
+Output:
+3
+
+Test Case 2:
+Input:
+3
+aaaaabbbbb
+a b c
+Output:
+2
+
+Test Case 2:
+Input:
+3
+ab
+a a a
+Output:
+3
