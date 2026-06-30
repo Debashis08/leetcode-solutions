@@ -57,6 +57,7 @@ public:
 
 int main()
 {
+    bool isAnyTestFailed = false;
     std::string sourceFilePath;
     std::cout << "Enter full path to the C++ source file (.cpp): ";
     std::getline(std::cin, sourceFilePath);
@@ -67,7 +68,7 @@ int main()
     testCaseFilePath = helper.ChangeExtensionToTxt(testCaseFilePath);
 
     // Compile the source code
-    std::string compileCommand = "g++ \"" + sourceFilePath + "\" -o " EXECUTABLE_NAME " 2> compile_errors.txt";
+    std::string compileCommand = "g++ -std=c++20 \"" + sourceFilePath + "\" -o " EXECUTABLE_NAME " 2> compile_errors.txt";
     int compileResult = std::system(compileCommand.c_str());
 
     if (compileResult != 0)
@@ -145,6 +146,7 @@ int main()
             std::cout << "Test Case " << (i + 1) << ": " << COLOR_RED_BOLD << "Failed" << COLOR_RESET << '\n';
             std::cout << "Expected:\n" << expected << "\n";
             std::cout << "Got:\n" << actual << "\n";
+            isAnyTestFailed = true;
         }
     }
 
@@ -153,5 +155,5 @@ int main()
     std::remove("temp_output.txt");
     std::remove("solution_test_exec.exe");
 
-    return 0;
+    return isAnyTestFailed ? 1 : 0;
 }

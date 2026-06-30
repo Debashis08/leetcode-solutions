@@ -1,0 +1,17 @@
+Test Case 1:
+Input:
+nlaebolko
+Output:
+1
+
+Test Case 2:
+Input:
+loonbalxballpoon
+Output:
+2
+
+Test Case 3:
+Input:
+leetcode
+Output:
+0

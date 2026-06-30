@@ -1,0 +1,17 @@
+Test Case 1:
+Input:
+12 30
+Output:
+165.00000
+
+Test Case 2:
+Input:
+3 30
+Output:
+75.00000
+
+Test Case 3:
+Input:
+3 15
+Output:
+7.50000

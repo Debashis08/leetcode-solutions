@@ -1,0 +1,15 @@
+Test Case 1:
+Input:
+011010
+2
+3
+Output:
+true
+
+Test Case 2:
+Input:
+01101110
+2
+3
+Output:
+false

@@ -1,0 +1,17 @@
+Test Case 1:
+Input:
+aaAbcBC
+Output:
+3
+
+Test Case 2:
+Input:
+abc
+Output:
+0
+
+Test Case 3:
+Input:
+abBCab
+Output:
+1
