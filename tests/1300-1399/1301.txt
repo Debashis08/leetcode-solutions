@@ -1,0 +1,26 @@
+Test Case 1:
+Input:
+3
+E23
+2X2
+12S
+Output:
+7 1
+
+Test Case 2:
+Input:
+3
+E12
+1X1
+21S
+Output:
+4 2
+
+Test Case 2:
+Input:
+3
+E11
+XXX
+11S
+Output:
+0 0
