@@ -46,7 +46,7 @@ class Solution
 {
 private:
 	vector<int> result;
-	void _addSequentialDigits(int current, int lastDigit, int low, int high)
+	void addSequentialDigits(int current, int lastDigit, int low, int high)
 	{
 		if (current >= low && current <= high)
 		{
@@ -57,14 +57,14 @@ private:
 			return;
 		}
 		int next = current * 10 + (lastDigit + 1);
-		this->_addSequentialDigits(next, lastDigit + 1, low, high);
+		this->addSequentialDigits(next, lastDigit + 1, low, high);
 	}
 public:
 	vector<int> sequentialDigits(int low, int high)
 	{
 		for (int i = 1; i < 9; i++)
 		{
-			this->_addSequentialDigits(i, i, low, high);
+			this->addSequentialDigits(i, i, low, high);
 		}
 
 		sort(result.begin(), result.end());
