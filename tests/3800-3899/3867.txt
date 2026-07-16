@@ -1,0 +1,13 @@
+Test Case 1:
+Input:
+3
+2 6 4
+Output:
+2
+
+Test Case 2:
+Input:
+4
+3 6 2 8
+Output:
+5
