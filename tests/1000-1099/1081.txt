@@ -1,0 +1,11 @@
+Test Case 1:
+Input:
+bcabc
+Output:
+abc
+
+Test Case 2:
+Input:
+cbacdcbc
+Output:
+acdb
