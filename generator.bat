@@ -14,7 +14,7 @@ echo %BLUE%Compiling Generator...%RESET%
 cd /d "%~dp0"
 
 :: Compile the C++ generator using C++17 (required for <filesystem>)
-g++ -std=c++17 generator.cpp -o generator.exe
+g++ -std=c++20 generator.cpp -o generator.exe
 
 :: Check if compilation failed
 if %errorlevel% neq 0 (
