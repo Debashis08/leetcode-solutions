@@ -4,6 +4,7 @@
 #include <sstream>
 #include <cstdlib>
 #include <cstdio>
+#include <iomanip>
 
 #ifdef _WIN32
 #define EXECUTABLE_NAME "solution_test_exec.exe"
@@ -25,24 +26,16 @@ public:
 class Helper
 {
 public:
-    std::string GetTestDataFolderPath(std::string filePath, const std::string& source, const std::string& target)
+    // Calculates the folder bucket (e.g., 3658 -> "3600-3699")
+    std::string GetFolderName(int problemId)
     {
-        size_t pos = filePath.find(source);
-        if (pos != std::string::npos)
-        {
-            filePath.replace(pos, source.length(), target);
-        }
-        return filePath;
-    }
+        int lower = (problemId / 100) * 100;
+        int upper = lower + 99;
 
-    std::string ChangeExtensionToTxt(const std::string& filepath)
-    {
-        size_t dotPos = filepath.find_last_of('.');
-        if (dotPos == std::string::npos)
-        {
-            return filepath + ".txt";
-        }
-        return filepath.substr(0, dotPos) + ".txt";
+        std::ostringstream ss;
+        ss << std::setfill('0') << std::setw(4) << lower << "-"
+            << std::setfill('0') << std::setw(4) << upper;
+        return ss.str();
     }
 
     std::string Trim(std::string s)
@@ -58,14 +51,34 @@ public:
 int main()
 {
     bool isAnyTestFailed = false;
-    std::string sourceFilePath;
-    std::cout << "Enter full path to the C++ source file (.cpp): ";
-    std::getline(std::cin, sourceFilePath);
+    int problemId;
 
-    // Derive test case file path
+    std::cout << "Enter Problem ID: ";
+    if (!(std::cin >> problemId))
+    {
+        std::cerr << COLOR_RED_BOLD << "[ERROR] Invalid input. Please enter a numeric ID." << COLOR_RESET << "\n";
+        return 1;
+    }
+
     Helper helper;
-    std::string testCaseFilePath = helper.GetTestDataFolderPath(sourceFilePath, "src\\", "tests\\");
-    testCaseFilePath = helper.ChangeExtensionToTxt(testCaseFilePath);
+    std::string folderName = helper.GetFolderName(problemId);
+    std::string problemName = std::to_string(problemId);
+
+    // Automatically construct paths based on the repository structure
+    // Using '/' works cross-platform for standard libraries and g++
+    std::string sourceFilePath = "src/" + folderName + "/" + problemName + ".cpp";
+    std::string testCaseFilePath = "tests/" + folderName + "/" + problemName + ".txt";
+
+    std::cout << "Targeting Source: " << sourceFilePath << "\n";
+    std::cout << "Targeting Tests : " << testCaseFilePath << "\n\n";
+
+    // Check if the test case file actually exists before attempting compilation
+    std::ifstream inputFile(testCaseFilePath);
+    if (!inputFile)
+    {
+        std::cerr << COLOR_RED_BOLD << "[ERROR] Failed to open test case file: " << testCaseFilePath << COLOR_RESET << "\n";
+        return 1;
+    }
 
     // Compile the source code
     std::string compileCommand = "g++ -std=c++20 \"" + sourceFilePath + "\" -o " EXECUTABLE_NAME " 2> compile_errors.txt";
@@ -73,14 +86,7 @@ int main()
 
     if (compileResult != 0)
     {
-        std::cerr << "Compilation failed. See compile_errors.txt\n";
-        return 1;
-    }
-
-    std::ifstream inputFile(testCaseFilePath);
-    if (!inputFile)
-    {
-        std::cerr << "Failed to open test case file: " << testCaseFilePath << "\n";
+        std::cerr << COLOR_RED_BOLD << "Compilation failed. See compile_errors.txt" << COLOR_RESET << "\n";
         return 1;
     }
 
@@ -113,6 +119,12 @@ int main()
             testCases.push_back(testCase);
         }
     }
+    inputFile.close();
+
+    if (testCases.empty())
+    {
+        std::cout << "[WARNING] No test cases found in the file.\n";
+    }
 
     // Execute each test case
     for (size_t i = 0; i < testCases.size(); i++)
@@ -120,9 +132,9 @@ int main()
         std::string inputFileName = "temp_input.txt";
         std::string outputFileName = "temp_output.txt";
 
-        std::ofstream inputFile(inputFileName);
-        inputFile << testCases[i].inputBlock;
-        inputFile.close();
+        std::ofstream tempInput(inputFileName);
+        tempInput << testCases[i].inputBlock;
+        tempInput.close();
 
         std::string runCommand = std::string(EXECUTABLE_NAME) + " < " + inputFileName + " > " + outputFileName;
         std::system(runCommand.c_str());
@@ -133,6 +145,7 @@ int main()
         {
             ossActual << line << '\n';
         }
+        outputFile.close();
 
         std::string expected = helper.Trim(testCases[i].expectedOutputBlock);
         std::string actual = helper.Trim(ossActual.str());
@@ -154,6 +167,7 @@ int main()
     std::remove("temp_input.txt");
     std::remove("temp_output.txt");
     std::remove("solution_test_exec.exe");
+    std::remove("solution_test_exec"); // Linux cleanup just in case
 
     return isAnyTestFailed ? 1 : 0;
 }
