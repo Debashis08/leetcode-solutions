@@ -1,0 +1,23 @@
+Test Case 1:
+Input:
+01
+Output:
+1
+
+Test Case 2:
+Input:
+0100
+Output:
+4
+
+Test Case 3:
+Input:
+1000100
+Output:
+7
+
+Test Case 4:
+Input:
+01010
+Output:
+4
