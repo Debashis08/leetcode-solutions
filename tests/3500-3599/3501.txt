@@ -1,0 +1,38 @@
+Test Case 1:
+Input:
+01
+1
+0 1
+Output:
+1
+
+Test Case 2:
+Input:
+0100
+4
+0 3
+0 2
+1 3
+2 3
+Output:
+4 3 1 1
+
+Test Case 3:
+Input:
+1000100
+3
+1 5
+0 6
+0 4
+Output:
+6 7 2
+
+Test Case 4:
+Input:
+01010
+3
+0 3
+1 4
+1 3
+Output:
+4 4 2
