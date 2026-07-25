@@ -1,0 +1,17 @@
+Test Case 1:
+Input:
+31
+Output:
+3
+
+Test Case 2:
+Input:
+22
+Output:
+4
+
+Test Case 3:
+Input:
+124
+Output:
+8
