@@ -1,0 +1,27 @@
+Test Case 1:
+Input:
+3
+1 2 3
+Output:
+6
+
+Test Case 2:
+Input:
+4
+1 2 3 4
+Output:
+24
+
+Test Case 3:
+Input:
+3
+-1 -2 -3
+Output:
+-6
+
+Test Case 4:
+Input:
+6
+-100 -98 -1 2 3 4
+Output:
+39200
