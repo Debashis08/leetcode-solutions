@@ -1,0 +1,17 @@
+Test Case 1:
+Input:
+z
+Output:
+z
+
+Test Case 2:
+Input:
+babab
+Output:
+abbba
+
+Test Case 3:
+Input:
+daccad
+Output:
+acddca
