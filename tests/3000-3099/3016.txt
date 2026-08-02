@@ -1,0 +1,17 @@
+Test Case 1:
+Input:
+abcde
+Output:
+5
+
+Test Case 2:
+Input:
+xyzxyzxyzxyz
+Output:
+12
+
+Test Case 3:
+Input:
+aabbccddeeffgghhiiiiii
+Output:
+24
