@@ -47,6 +47,32 @@ public:
 		}
 	}
 
+    template<typename T>
+    static void printTwoDimensionalVectorResult(vector<vector<T>> result)
+    {
+        int rows = result.size();
+        int columns = result[0].size();
+
+        for (int i = 0; i < rows; i++)
+        {
+            for (int j = 0; j < columns; j++)
+            {
+                if (j == columns - 1)
+                {
+                    cout << result[i][j];
+                }
+                else
+                {
+                    cout << result[i][j] << " ";
+                }
+            }
+            if (i != rows - 1)
+            {
+                cout << "\n";
+            }
+        }
+    }
+
     static void printBinaryTreeInLevelOrder(TreeNode* root)
     {
         if (!root)
