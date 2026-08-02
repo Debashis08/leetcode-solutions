@@ -1,0 +1,20 @@
+Test Case 1:
+Input:
+abba
+2
+Output:
+baab
+
+Test Case 2:
+Input:
+aa
+2
+Output:
+
+
+Test Case 3:
+Input:
+bacab
+1
+Output:
+abcba
