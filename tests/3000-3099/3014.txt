@@ -1,0 +1,11 @@
+Test Case 1:
+Input:
+abcde
+Output:
+5
+
+Test Case 2:
+Input:
+xycdefghij
+Output:
+12
