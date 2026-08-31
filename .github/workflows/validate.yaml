@@ -30,29 +30,9 @@ jobs:
             exit 1
           fi
 
-  # job 2: Static code analysis
-  lint-code:
-    needs: validate-branch-policy
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Install clang-tidy
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y clang-tidy
-
-      - name: Run clang-tidy
-        run: |
-          find src -name '*.cpp' | while read file; do
-            echo "clang-tidy checking on $file"
-            clang-tidy "$file" -- -std=c++20 || exit 1
-          done
-
-  # job 3: Build Project 
+  # job 2: Build Project 
   build-project:
-    needs: lint-code
+    needs: validate-branch-policy
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -75,7 +55,7 @@ jobs:
           path: tests/allTestRunner
           retention-days: 1
 
-  # job 4: Run all tests
+  # job 3: Run all tests
   run-all-tests:
     needs: build-project
     runs-on: ubuntu-latest

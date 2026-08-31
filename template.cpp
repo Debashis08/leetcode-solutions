@@ -27,6 +27,8 @@ Problem Description
 #include <functional>
 #include <cstring>
 #include <climits>
+#include <bitset>
+#include <ranges>
 #include "../core/core.h"
 using namespace std;
 

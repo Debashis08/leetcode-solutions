@@ -1,0 +1,20 @@
+Test Case 1:
+Input:
+4
+1 2 3 7
+Output:
+Bob
+
+Test Case 2:
+Input:
+4
+1 2 3 -9
+Output:
+Alice
+
+Test Case 3:
+Input:
+4
+1 2 3 6
+Output:
+Tie
